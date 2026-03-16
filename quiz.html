@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AEMS - Quiz de Cibersegurança</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
+  <script src="quiz.js"></script>
+</head>
+
+<body>
+  <div class="glass">
+    <header class="header">
+      <div class="container header-container">
+        <div class="logo">
+          <a href="index.html"><img src="images/aemsLogo.png" alt="Logo AEMS" /></a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="quiz-section">
+        <div class="container">
+          <h1 class="section-title">Quiz de Cibersegurança</h1>
+          <p>Teste seus conhecimentos respondendo às perguntas abaixo. Escolha a opção correta para cada uma.</p>
+          <form id="quiz-form">
+            <div id="quiz-container"></div>
+            <button type="button" id="submit-quiz" class="cta-button">VERIFICAR RESPOSTAS</button>
+          </form>
+          <div id="results" style="display: none;">
+            <h2>Resultados</h2>
+            <p id="score"></p>
+            <p id="feedback"></p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>AEMS © 2025 - v1.0</p>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>
