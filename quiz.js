@@ -89,5 +89,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     resultsDiv.style.display = 'block';
+    
   });
 });
