@@ -1,0 +1,630 @@
+{
+  "version": 1,
+  "dispositivos": [
+    {
+      "id": "celular",
+      "label": "Celular"
+    },
+    {
+      "id": "console",
+      "label": "Videogame (console)"
+    },
+    {
+      "id": "impressora",
+      "label": "Impressora"
+    },
+    {
+      "id": "notebook",
+      "label": "Notebook"
+    },
+    {
+      "id": "pc",
+      "label": "Computador (PC)"
+    },
+    {
+      "id": "roteador",
+      "label": "Roteador"
+    },
+    {
+      "id": "servidor",
+      "label": "Servidor"
+    },
+    {
+      "id": "smart_tv",
+      "label": "Smart TV"
+    },
+    {
+      "id": "tablet",
+      "label": "Tablet"
+    },
+    {
+      "id": "webcam",
+      "label": "Webcam"
+    }
+  ],
+  "perguntas": [
+    {
+      "id": 1,
+      "texto": "O dispositivo está lento sem motivo aparente?"
+    },
+    {
+      "id": 2,
+      "texto": "Aparecem anúncios inesperados na tela?"
+    },
+    {
+      "id": 3,
+      "texto": "Arquivos foram criptografados ou renomeados?"
+    },
+    {
+      "id": 4,
+      "texto": "O antivírus foi desativado automaticamente?"
+    },
+    {
+      "id": 5,
+      "texto": "Há processos desconhecidos no gerenciador de tarefas?"
+    },
+    {
+      "id": 6,
+      "texto": "A câmera ou microfone liga sem permissão?"
+    },
+    {
+      "id": 7,
+      "texto": "O navegador redireciona para sites desconhecidos?"
+    },
+    {
+      "id": 8,
+      "texto": "Aparece mensagem pedindo resgate em dinheiro?"
+    },
+    {
+      "id": 9,
+      "texto": "Senhas pararam de funcionar repentinamente?"
+    },
+    {
+      "id": 10,
+      "texto": "O consumo de dados móveis aumentou sem uso?"
+    },
+    {
+      "id": 11,
+      "texto": "O dispositivo esquenta mais do que o normal?"
+    },
+    {
+      "id": 12,
+      "texto": "Há logins não reconhecidos em contas online?"
+    },
+    {
+      "id": 13,
+      "texto": "O roteador tem configurações alteradas sem sua ação?"
+    },
+    {
+      "id": 14,
+      "texto": "Aparecem extensões desconhecidas no navegador?"
+    },
+    {
+      "id": 15,
+      "texto": "E-mails foram enviados sem o seu conhecimento?"
+    },
+    {
+      "id": 16,
+      "texto": "O firewall está habilitado no dispositivo?"
+    },
+    {
+      "id": 17,
+      "texto": "O sistema operacional está atualizado?"
+    },
+    {
+      "id": 18,
+      "texto": "Você usa senhas diferentes para cada serviço?"
+    },
+    {
+      "id": 19,
+      "texto": "Autenticação de dois fatores está ativada?"
+    },
+    {
+      "id": 20,
+      "texto": "Você clicou em link de e-mail suspeito recentemente?"
+    },
+    {
+      "id": 21,
+      "texto": "Arquivos importantes desapareceram do sistema?"
+    },
+    {
+      "id": 22,
+      "texto": "O uso de CPU está elevado sem programas abertos?"
+    },
+    {
+      "id": 23,
+      "texto": "A internet doméstica está mais lenta do que o normal?"
+    },
+    {
+      "id": 24,
+      "texto": "Algum programa foi instalado sem sua autorização?"
+    },
+    {
+      "id": 25,
+      "texto": "O dispositivo reinicia sozinho com frequência?"
+    },
+    {
+      "id": 26,
+      "texto": "Você recebeu e-mail pedindo seus dados bancários?"
+    },
+    {
+      "id": 27,
+      "texto": "O teclado digita caracteres diferentes do pressionado?"
+    },
+    {
+      "id": 28,
+      "texto": "Há cobranças desconhecidas no cartão de crédito?"
+    },
+    {
+      "id": 29,
+      "texto": "O dispositivo demora para desligar?"
+    },
+    {
+      "id": 30,
+      "texto": "Aplicativos fecham sozinhos com frequência?"
+    },
+    {
+      "id": 31,
+      "texto": "A bateria descarrega muito mais rápido do que antes?"
+    },
+    {
+      "id": 32,
+      "texto": "Você compartilha senhas com outras pessoas?"
+    },
+    {
+      "id": 33,
+      "texto": "O backup dos dados está atualizado?"
+    },
+    {
+      "id": 34,
+      "texto": "A VPN está habilitada em redes públicas?"
+    },
+    {
+      "id": 35,
+      "texto": "Você usa redes Wi-Fi públicas sem proteção?"
+    },
+    {
+      "id": 36,
+      "texto": "Há software pirata instalado no dispositivo?"
+    },
+    {
+      "id": 37,
+      "texto": "O servidor apresenta quedas frequentes de serviço?"
+    },
+    {
+      "id": 38,
+      "texto": "O acesso remoto está habilitado sem necessidade?"
+    },
+    {
+      "id": 39,
+      "texto": "Arquivos do sistema foram modificados recentemente?"
+    },
+    {
+      "id": 40,
+      "texto": "O dispositivo aparece online mesmo desligado?"
+    },
+    {
+      "id": 41,
+      "texto": "Há portas de rede abertas desnecessariamente?"
+    },
+    {
+      "id": 42,
+      "texto": "O DNS do roteador foi alterado?"
+    },
+    {
+      "id": 43,
+      "texto": "Você recebeu ligação pedindo acesso remoto ao PC?"
+    },
+    {
+      "id": 44,
+      "texto": "A webcam tem luz indicadora acendendo sozinha?"
+    },
+    {
+      "id": 45,
+      "texto": "Contatos receberam mensagens suas que você não enviou?"
+    },
+    {
+      "id": 46,
+      "texto": "O sistema apresenta tela azul com frequência?"
+    },
+    {
+      "id": 47,
+      "texto": "Há arquivos com extensão estranha no dispositivo?"
+    },
+    {
+      "id": 48,
+      "texto": "O servidor de e-mail foi rejeitado por blacklist?"
+    },
+    {
+      "id": 49,
+      "texto": "Algum certificado SSL do site expirou?"
+    },
+    {
+      "id": 50,
+      "texto": "O dispositivo foi formatado recentemente por motivo desconhecido?"
+    }
+  ],
+  "perguntaSimSintomas": {
+    "1": [
+      "lento"
+    ],
+    "11": [
+      "superaquecimento"
+    ],
+    "13": [
+      "queda_conexao"
+    ],
+    "22": [
+      "alto_consumo_cpu"
+    ],
+    "23": [
+      "internet_lenta"
+    ],
+    "30": [
+      "apps_fechando"
+    ],
+    "31": [
+      "bateria_curta"
+    ],
+    "37": [
+      "indisponivel"
+    ],
+    "44": [
+      "nao_reconhecida"
+    ],
+    "46": [
+      "tela_azul"
+    ]
+  },
+  "perguntaSimAmeacas": {
+    "2": [
+      "adware"
+    ],
+    "3": [
+      "ransomware"
+    ],
+    "4": [
+      "malware"
+    ],
+    "5": [
+      "malware"
+    ],
+    "6": [
+      "spyware"
+    ],
+    "7": [
+      "malware"
+    ],
+    "8": [
+      "ransomware"
+    ],
+    "9": [
+      "phishing"
+    ],
+    "10": [
+      "spyware"
+    ],
+    "12": [
+      "phishing"
+    ],
+    "13": [
+      "worm"
+    ],
+    "14": [
+      "malware"
+    ],
+    "15": [
+      "trojan"
+    ],
+    "20": [
+      "phishing"
+    ],
+    "21": [
+      "ransomware"
+    ],
+    "24": [
+      "trojan"
+    ],
+    "25": [
+      "malware"
+    ],
+    "26": [
+      "phishing"
+    ],
+    "27": [
+      "keylogger"
+    ],
+    "28": [
+      "phishing"
+    ],
+    "29": [
+      "malware"
+    ],
+    "38": [
+      "exploit"
+    ],
+    "39": [
+      "rootkit"
+    ],
+    "40": [
+      "malware"
+    ],
+    "41": [
+      "exploit"
+    ],
+    "42": [
+      "worm"
+    ],
+    "43": [
+      "phishing"
+    ],
+    "45": [
+      "spyware"
+    ],
+    "47": [
+      "ransomware"
+    ],
+    "48": [
+      "exploit"
+    ],
+    "49": [
+      "exploit"
+    ],
+    "50": [
+      "malware"
+    ]
+  },
+  "boaPraticaSim": [
+    16,
+    17,
+    18,
+    19,
+    33,
+    34
+  ],
+  "maPraticaSim": [
+    32,
+    35,
+    36
+  ],
+  "instalado": [
+    [
+      "celular",
+      "antimalware"
+    ],
+    [
+      "celular",
+      "autenticacao_2fatores"
+    ],
+    [
+      "notebook",
+      "antivirus"
+    ],
+    [
+      "pc",
+      "antivirus"
+    ],
+    [
+      "pc",
+      "firewall"
+    ],
+    [
+      "roteador",
+      "firewall"
+    ],
+    [
+      "servidor",
+      "backup"
+    ],
+    [
+      "servidor",
+      "criptografia"
+    ]
+  ],
+  "comum": [
+    [
+      "celular",
+      "adware"
+    ],
+    [
+      "celular",
+      "spyware"
+    ],
+    [
+      "notebook",
+      "malware"
+    ],
+    [
+      "notebook",
+      "spyware"
+    ],
+    [
+      "pc",
+      "malware"
+    ],
+    [
+      "pc",
+      "ransomware"
+    ],
+    [
+      "pc",
+      "trojan"
+    ],
+    [
+      "roteador",
+      "worm"
+    ],
+    [
+      "servidor",
+      "exploit"
+    ],
+    [
+      "servidor",
+      "ransomware"
+    ],
+    [
+      "tablet",
+      "adware"
+    ],
+    [
+      "webcam",
+      "rootkit"
+    ]
+  ],
+  "indicaAmeaca": [
+    [
+      "alto_consumo_cpu",
+      "exploit"
+    ],
+    [
+      "apps_fechando",
+      "malware"
+    ],
+    [
+      "bateria_curta",
+      "spyware"
+    ],
+    [
+      "indisponivel",
+      "ransomware"
+    ],
+    [
+      "internet_lenta",
+      "adware"
+    ],
+    [
+      "lento",
+      "adware"
+    ],
+    [
+      "lento",
+      "malware"
+    ],
+    [
+      "nao_conecta_wifi",
+      "spyware"
+    ],
+    [
+      "nao_imprime",
+      "malware"
+    ],
+    [
+      "nao_reconhecida",
+      "rootkit"
+    ],
+    [
+      "queda_conexao",
+      "worm"
+    ],
+    [
+      "superaquecimento",
+      "malware"
+    ],
+    [
+      "tela_azul",
+      "rootkit"
+    ],
+    [
+      "travando",
+      "ransomware"
+    ]
+  ],
+  "sintomas": [
+    [
+      "celular",
+      "apps_fechando"
+    ],
+    [
+      "celular",
+      "bateria_curta"
+    ],
+    [
+      "celular",
+      "superaquecimento"
+    ],
+    [
+      "console",
+      "superaquecimento"
+    ],
+    [
+      "impressora",
+      "nao_imprime"
+    ],
+    [
+      "notebook",
+      "bateria_curta"
+    ],
+    [
+      "notebook",
+      "lento"
+    ],
+    [
+      "pc",
+      "lento"
+    ],
+    [
+      "pc",
+      "superaquecimento"
+    ],
+    [
+      "pc",
+      "tela_azul"
+    ],
+    [
+      "roteador",
+      "internet_lenta"
+    ],
+    [
+      "roteador",
+      "queda_conexao"
+    ],
+    [
+      "servidor",
+      "alto_consumo_cpu"
+    ],
+    [
+      "servidor",
+      "indisponivel"
+    ],
+    [
+      "smart_tv",
+      "nao_conecta_wifi"
+    ],
+    [
+      "tablet",
+      "nao_carrega"
+    ],
+    [
+      "tablet",
+      "travando"
+    ],
+    [
+      "webcam",
+      "nao_reconhecida"
+    ]
+  ],
+  "ameacaLabels": {
+    "malware": "Malware",
+    "ransomware": "Ransomware",
+    "spyware": "Spyware",
+    "adware": "Adware",
+    "trojan": "Trojan",
+    "worm": "Worm",
+    "rootkit": "Rootkit",
+    "keylogger": "Keylogger",
+    "phishing": "Phishing",
+    "exploit": "Exploit"
+  },
+  "medidaLabels": {
+    "antivirus": "Antivírus",
+    "firewall": "Firewall",
+    "antimalware": "Antimalware",
+    "vpn": "VPN",
+    "backup": "Backup",
+    "autenticacao_2fatores": "Autenticação em dois fatores",
+    "criptografia": "Criptografia",
+    "atualizacoes": "Atualizações do sistema",
+    "adblock": "Bloqueador de anúncios",
+    "proxy": "Proxy"
+  }
+}

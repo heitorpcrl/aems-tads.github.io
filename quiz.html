@@ -7,7 +7,6 @@
   <title>AEMS - Quiz de Cibersegurança</title>
   <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./style.css" />
-  <script src="quiz.js"></script>
 </head>
 
 <body>
@@ -24,15 +23,36 @@
       <section class="quiz-section">
         <div class="container">
           <h1 class="section-title">Quiz de Cibersegurança</h1>
-          <p>Teste seus conhecimentos respondendo às perguntas abaixo. Escolha a opção correta para cada uma.</p>
+          <p>
+            Escolha o dispositivo e responda com <strong>Sim</strong> ou <strong>Não</strong>. O resultado cruza suas
+            respostas com a base de conhecimento do projeto (mesma lógica do módulo Python / regras Prolog).
+          </p>
+          <p id="quiz-status" class="quiz-status"></p>
           <form id="quiz-form">
+            <div class="quiz-device">
+              <label for="quiz-dispositivo"><strong>Tipo de dispositivo</strong></label>
+              <select id="quiz-dispositivo" name="dispositivo" required>
+                <option value="">— Selecione —</option>
+              </select>
+            </div>
             <div id="quiz-container"></div>
-            <button type="button" id="submit-quiz" class="cta-button">VERIFICAR RESPOSTAS</button>
+            <button type="button" id="submit-quiz" class="cta-button">ANALISAR COM A BASE DE CONHECIMENTO</button>
           </form>
-          <div id="results" style="display: none;">
-            <h2>Resultados</h2>
-            <p id="score"></p>
-            <p id="feedback"></p>
+          <div id="results" class="quiz-results" style="display: none;">
+            <h2>Resultado da análise</h2>
+            <p id="result-dispositivo"></p>
+            <p id="result-protecao"></p>
+            <h3>Ameaças comuns a este tipo (base)</h3>
+            <ul id="result-ameacas-comuns"></ul>
+            <h3>Ameaças sugeridas pelas respostas + sintomas</h3>
+            <p class="quiz-hint">Derivado de <code>indica_ameaca</code> e dos vínculos pergunta→sintoma/ameaça no Python.</p>
+            <ul id="result-ameacas-quiz"></ul>
+            <h3>Sintomas</h3>
+            <div id="result-sintomas"></div>
+            <h3>Recomendações do modelo</h3>
+            <ul id="result-recomendacoes"></ul>
+            <h3>Práticas e hábitos</h3>
+            <ul id="result-praticas"></ul>
           </div>
         </div>
       </section>
@@ -44,6 +64,7 @@
       </div>
     </footer>
   </div>
+  <script src="quiz.js" defer></script>
 </body>
 
 </html>
