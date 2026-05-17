@@ -1,4 +1,4 @@
-"""Gera kb_web.json para o quiz estático. Execute após alterar ciberseguranca_kb.py."""
+"""Gera kb_web.json para o chatbot estático. Execute após alterar ciberseguranca_kb.py."""
 
 import json
 
