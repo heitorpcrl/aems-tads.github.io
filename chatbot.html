@@ -35,20 +35,25 @@
           </p>
           <p id="chat-status" class="chat-status" role="status"></p>
 
-          <motionless-div class="chat-panel">
+          <div class="chat-panel">
             <div id="chat-messages" class="chat-messages" aria-live="polite"></div>
 
-            <div id="chat-suggestions" class="chat-suggestions" aria-label="Sugestões de pergunta"></div>
+            <div class="chat-suggestions-wrap">
+              <p class="chat-suggestions-label">Perguntas sugeridas</p>
+              <div id="chat-suggestions" class="chat-suggestions" aria-label="Sugestões de pergunta"></div>
+            </div>
 
             <div class="chat-input-row">
               <textarea id="chat-input" class="chat-input" rows="2"
                 placeholder="Ex.: O que é phishing? Como proteger meu celular?" aria-label="Sua mensagem"></textarea>
               <div class="chat-actions">
-                <button type="button" id="chat-send" class="cta-button chat-send-btn">Enviar</button>
-                <button type="button" id="chat-clear" class="chat-clear-btn">Limpar</button>
+                <button type="button" id="chat-send" class="chat-btn chat-btn-primary">
+                  <span class="chat-btn-icon" aria-hidden="true">➤</span> Enviar
+                </button>
+                <button type="button" id="chat-clear" class="chat-btn chat-btn-secondary">Limpar chat</button>
               </div>
             </div>
-          </motionless-div>
+          </div>
         </div>
       </section>
     </main>
@@ -56,7 +61,7 @@
     <footer class="footer">
       <div class="container">
         <p>AEMS © 2025 - v1.0</p>
-      </motionless-div>
+      </div>
     </footer>
   </div>
   <script src="chatbot.js" defer></script>

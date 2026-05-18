@@ -628,7 +628,15 @@
     "proxy": "Proxy"
   },
   "chatbot": {
-    "mensagemBoasVindas": "Olá! Sou o assistente AEMS de tecnologia e cibersegurança. Tire dúvidas sobre golpes, ameaças, dispositivos e boas práticas — sempre de forma ética e educativa.",
+    "mensagemBoasVindas": "## Bem-vindo ao Assistente AEMS\n\nTire dúvidas sobre golpes na internet, ameaças digitais e boas práticas de tecnologia.\n\n**Como se proteger:**\n- Toque em uma pergunta sugerida ou escreva a sua.\n- As respostas usam a base de conhecimento do projeto (Python / Prolog).\n\n**Atenção:** Conteúdo educativo e ético — sem orientação para crimes digitais.",
+    "respostasFixas": {
+      "vazia": "## Digite sua pergunta\n\nEstou pronto para ajudar com tecnologia e segurança digital.\n\n**Como se proteger:**\n- Use as sugestões abaixo ou escreva em suas palavras.",
+      "saudacao": "## Olá!\n\nSou o assistente AEMS de tecnologia e cibersegurança.\n\n**Como se proteger:**\n- Pergunte sobre golpes, ameaças e proteção de dispositivos.\n- Clique em uma sugestão para começar.\n\n**Atenção:** Não oriento invasões nem atividades ilegais.",
+      "agradecimento": "## De nada!\n\nFico feliz em ajudar. Se surgir outra dúvida sobre segurança digital, é só perguntar.",
+      "ajuda": "## Como posso ajudar\n\nEscolha um tema abaixo ou digite sua dúvida.\n\n**Perguntas sugeridas:**\n- O que é phishing?\n- O que é malware?\n- Como evitar WhatsApp clonado?\n- Golpe de ligação: o que fazer?\n- O que é engenharia social?\n- Como criar senhas seguras?\n- Devo usar autenticação em dois fatores?\n- Como denunciar um golpe?\n- Por que fazer backup?\n- VPN em rede pública: preciso?\n- Por que atualizar o sistema?\n- O que é firewall?\n- O que é ransomware?\n- Golpe com criptomoeda ou PIX\n- IA e segurança: o que saber?\n- Como proteger dispositivos IoT?\n- Privacidade e vazamento de dados\n- Carreira em tecnologia e ética\n- Como proteger meu celular?\n- Como proteger meu PC?\n- Como proteger o roteador Wi-Fi?\n- Quais ameaças são comuns no PC?\n- Quais ameaças são comuns no celular?",
+      "fallback": "## Não encontrei esse tema\n\nTente reformular ou escolha um dos assuntos abaixo.\n\n**Como se proteger:**\n- Golpes: phishing, WhatsApp clonado, ligação falsa.\n- Ameaças: malware, ransomware, spyware.\n- Proteção: senhas, 2FA, backup, VPN, firewall.\n- Dispositivos: PC, celular, roteador.\n\n**Atenção:** Não oriento invasões ou atividades ilegais.",
+      "boasVindas": "## Bem-vindo ao Assistente AEMS\n\nTire dúvidas sobre golpes na internet, ameaças digitais e boas práticas de tecnologia.\n\n**Como se proteger:**\n- Toque em uma pergunta sugerida ou escreva a sua.\n- As respostas usam a base de conhecimento do projeto (Python / Prolog).\n\n**Atenção:** Conteúdo educativo e ético — sem orientação para crimes digitais."
+    },
     "bloqueioEtico": [
       {
         "padroes": [
@@ -640,7 +648,7 @@
           "roubar senha",
           "quebrar senha"
         ],
-        "resposta": "Não posso ajudar com invasão, roubo de contas ou qualquer atividade ilegal. Se você suspeita de crime digital, denuncie na Delegacia Virtual e procure orientação legal. Posso explicar como se proteger de golpes e ameaças de forma ética."
+        "resposta": "## Conteúdo não permitido\n\nNão posso ajudar com invasão, roubo de contas ou qualquer atividade ilegal.\n\n**Como se proteger:**\n- Denuncie crimes digitais na Delegacia Virtual.\n- Pergunte como se proteger de golpes e ameaças."
       },
       {
         "padroes": [
@@ -651,7 +659,7 @@
           "phishing falso",
           "golpe passo"
         ],
-        "resposta": "Não forneço instruções para criar malware, golpes ou ferramentas de ataque. Posso explicar como reconhecer essas ameaças e se prevenir."
+        "resposta": "## Conteúdo não permitido\n\nNão forneço instruções para criar malware, golpes ou ferramentas de ataque.\n\n**Como se proteger:**\n- Posso explicar como reconhecer essas ameaças.\n- Posso orientar medidas de prevenção e denúncia."
       },
       {
         "padroes": [
@@ -660,7 +668,7 @@
           "warez",
           "serial ilegal"
         ],
-        "resposta": "Software pirata costuma trazer malware e viola direitos autorais. Recomendo usar programas oficiais, gratuitos ou com licença legítima."
+        "resposta": "## Software ilegal\n\nProgramas piratas costumam trazer malware e violam direitos autorais.\n\n**Como se proteger:**\n- Prefira software oficial, gratuito ou com licença legítima.\n- Use lojas e sites do fabricante."
       }
     ],
     "faqs": [
@@ -671,7 +679,8 @@
           "link falso",
           "email suspeito"
         ],
-        "resposta": "Phishing imita instituições confiáveis por e-mail ou mensagem com links falsos. Não clique em links de remetentes desconhecidos; acesse o site digitando o endereço oficial. Ative autenticação em dois fatores e denuncie tentativas de golpe."
+        "pergunta": "O que é phishing?",
+        "resposta": "## Phishing\n\nGolpistas imitam bancos, lojas ou contatos por e-mail, SMS ou redes sociais com links falsos.\n\n**Como se proteger:**\n- Não clique em links de remetentes desconhecidos.\n- Digite o endereço do site manualmente no navegador.\n- Ative autenticação em dois fatores.\n- Denuncie tentativas ao banco ou à polícia."
       },
       {
         "palavras": [
@@ -680,25 +689,36 @@
           "vírus",
           "programa malicioso"
         ],
-        "resposta": "Malware inclui vírus, trojans e spyware instalados sem seu consentimento. Evite anexos suspeitos, mantenha o sistema atualizado e use antivírus confiável. Em caso de infecção, desconecte da rede e busque suporte técnico."
+        "pergunta": "O que é malware?",
+        "resposta": "## Malware\n\nSoftware malicioso que infecta dispositivos para roubar dados, espionar ou danificar arquivos.\n\n**Como se proteger:**\n- Mantenha antivírus e sistema atualizados.\n- Evite downloads e anexos de fontes desconhecidas.\n- Desconfie de pendrives e links encurtados."
       },
       {
         "palavras": [
           "whatsapp clonado",
           "whatsapp clonagem",
           "clonar whats",
-          "pix golpe"
+          "pix golpe whats"
         ],
-        "resposta": "No golpe do WhatsApp clonado, criminosos pedem dinheiro fingindo ser você. Ative verificação em duas etapas, não compartilhe códigos SMS e avise contatos se for vítima. Denuncie transações fraudulentas ao banco imediatamente."
+        "pergunta": "Como evitar WhatsApp clonado?",
+        "resposta": "## Golpe do WhatsApp clonado\n\nCriminosos assumem sua conta e pedem PIX a contatos fingindo ser você.\n\n**Como se proteger:**\n- Ative verificação em duas etapas no WhatsApp.\n- Nunca compartilhe códigos SMS com terceiros.\n- Avise amigos e família se for vítima.\n- Denuncie transações fraudulentas ao banco na hora."
       },
       {
         "palavras": [
           "ligacao golpe",
           "ligacao falsa",
-          "suporte falso",
-          "engenharia social"
+          "suporte falso"
         ],
-        "resposta": "Golpistas se passam por banco ou suporte e pedem senhas ou instalação de apps remotos. Bancos não pedem senha por telefone. Desligue e ligue você mesmo para o número oficial."
+        "pergunta": "Golpe de ligação: o que fazer?",
+        "resposta": "## Ligações fraudulentas\n\nGolpistas se passam por banco, Receita ou suporte técnico para roubar dados.\n\n**Como se proteger:**\n- Bancos não pedem senha por telefone.\n- Desligue e ligue você para o número oficial do cartão.\n- Não instale programas por ordem de desconhecidos."
+      },
+      {
+        "palavras": [
+          "engenharia social",
+          "manipulacao",
+          "golpe telefone"
+        ],
+        "pergunta": "O que é engenharia social?",
+        "resposta": "## Engenharia social\n\nManipulação psicológica para obter dados, dinheiro ou acesso a sistemas.\n\n**Como se proteger:**\n- Desconfie de urgência e prêmios inesperados.\n- Confirme identidade por canal oficial.\n- Não transfira PIX sem validar quem está do outro lado."
       },
       {
         "palavras": [
@@ -707,7 +727,8 @@
           "gerenciador de senha",
           "senhas diferentes"
         ],
-        "resposta": "Use senhas longas e únicas por serviço; um gerenciador de senhas ajuda a guardá-las com segurança. Ative autenticação em dois fatores sempre que disponível."
+        "pergunta": "Como criar senhas seguras?",
+        "resposta": "## Senhas seguras\n\nSenhas fracas ou repetidas são uma das principais portas de entrada para golpes.\n\n**Como se proteger:**\n- Use senhas longas e únicas por serviço.\n- Adote um gerenciador de senhas confiável.\n- Ative autenticação em dois fatores.\n- Nunca compartilhe senhas com outras pessoas."
       },
       {
         "palavras": [
@@ -716,7 +737,8 @@
           "dois fatores",
           "verificacao dupla"
         ],
-        "resposta": "A autenticação em dois fatores exige algo além da senha (app ou código). Ative em e-mail, redes sociais e contas financeiras — é uma das medidas mais eficazes."
+        "pergunta": "Devo usar autenticação em dois fatores?",
+        "resposta": "## Autenticação em dois fatores (2FA)\n\nExige um segundo passo além da senha (app, SMS ou chave).\n\n**Como se proteger:**\n- Ative em e-mail, banco e redes sociais.\n- Prefira app autenticador em vez de SMS quando possível."
       },
       {
         "palavras": [
@@ -726,7 +748,8 @@
           "delegacia virtual",
           "como denunciar"
         ],
-        "resposta": "Reúna prints e mensagens, registre boletim na Delegacia Virtual, avise bancos envolvidos e use Consumidor.gov.br ou Procon quando aplicável. Em emergência, procure a Polícia Civil ou Federal."
+        "pergunta": "Como denunciar um golpe?",
+        "resposta": "## Como denunciar um golpe no Brasil\n\nAgir rápido aumenta a chance de bloquear prejuízos e ajudar investigações.\n\n**Como se proteger:**\n- Reúna prints, e-mails e comprovantes.\n- Registre boletim na Delegacia Virtual.\n- Comunique bancos e empresas envolvidas.\n- Use Consumidor.gov.br ou Procon quando for caso de consumo.\n\n**Atenção:** Em emergência, procure a Polícia Civil ou Federal."
       },
       {
         "palavras": [
@@ -734,7 +757,8 @@
           "copia de seguranca",
           "reserva de dados"
         ],
-        "resposta": "Faça backups regulares em nuvem confiável ou disco externo desconectado após a cópia. Isso protege contra ransomware e falhas de hardware."
+        "pergunta": "Por que fazer backup?",
+        "resposta": "## Backup\n\nCópias dos dados permitem recuperação após ransomware ou falhas.\n\n**Como se proteger:**\n- Agende backups automáticos.\n- Guarde uma cópia offline ou desconectada.\n- Teste a restauração de tempos em tempos."
       },
       {
         "palavras": [
@@ -743,7 +767,8 @@
           "wifi publico",
           "wi-fi publico"
         ],
-        "resposta": "Em redes públicas, evite acessar banco sem VPN confiável e prefira dados móveis quando possível. VPN não substitui senhas fortes e atualizações."
+        "pergunta": "VPN em rede pública: preciso?",
+        "resposta": "## VPN\n\nCriptografa o tráfego em redes públicas.\n\n**Como se proteger:**\n- Use em Wi-Fi de aeroporto, shopping e cafés.\n- Prefira serviços pagos e transparentes em política de privacidade.\n\n**Atenção:** VPN não substitui senhas fortes nem atualizações."
       },
       {
         "palavras": [
@@ -752,13 +777,15 @@
           "patch",
           "atualizacoes"
         ],
-        "resposta": "Atualizações corrigem falhas usadas por hackers. Configure atualizações automáticas em SO e apps."
+        "pergunta": "Por que atualizar o sistema?",
+        "resposta": "## Atualizações de segurança\n\nCorrigem falhas exploradas por criminosos.\n\n**Como se proteger:**\n- Configure atualizações automáticas.\n- Reinicie o dispositivo após patches importantes."
       },
       {
         "palavras": [
           "firewall"
         ],
-        "resposta": "O firewall bloqueia conexões não autorizadas. Mantenha ativo no Windows/macOS/Linux e revise regras do roteador."
+        "pergunta": "O que é firewall?",
+        "resposta": "## Firewall\n\nFiltra conexões de rede não autorizadas.\n\n**Como se proteger:**\n- Ative no sistema operacional.\n- Revise regras do roteador.\n- Bloqueie portas desnecessárias."
       },
       {
         "palavras": [
@@ -766,13 +793,8 @@
           "resgate",
           "arquivo criptografado"
         ],
-        "resposta": "Não pague resgate sem orientação especializada. Isole o dispositivo, preserve evidências e denuncie. Backups recentes são a melhor recuperação."
-      },
-      {
-        "palavras": [
-          "engenharia social"
-        ],
-        "resposta": "Manipulação psicológica para obter dados ou acesso. Desconfie de urgência, prêmios falsos e pedidos de PIX. Confirme identidade por canal oficial antes de agir."
+        "pergunta": "O que é ransomware?",
+        "resposta": "## Ransomware\n\nCriptografa arquivos e exige pagamento para liberá-los — um dos golpes mais graves para pessoas e empresas.\n\n**Como se proteger:**\n- Faça backups regulares em mídia offline ou nuvem confiável.\n- Não abra anexos suspeitos em e-mails.\n- Mantenha cópias de documentos importantes fora do PC principal.\n\n**Atenção:** Não pague resgate sem orientação da polícia e de especialistas."
       },
       {
         "palavras": [
@@ -780,7 +802,8 @@
           "bitcoin golpe",
           "pix golpe idoso"
         ],
-        "resposta": "Golpes com criptomoedas usam pressão e falsa autoridade. Nunca transfira por ordem de desconhecidos. Converse com familiares e denuncie se já for vítima."
+        "pergunta": "Golpe com criptomoeda ou PIX",
+        "resposta": "## Golpes financeiros online\n\nCriminosos usam pressão, falsas autoridades ou investimentos milagrosos.\n\n**Como se proteger:**\n- Nunca transfira por ordem de desconhecidos.\n- Converse com familiares antes de decisões urgentes.\n- Denuncie se já for vítima."
       },
       {
         "palavras": [
@@ -789,7 +812,8 @@
           "chatgpt",
           "tecnologia futuro"
         ],
-        "resposta": "A IA na tecnologia exige uso responsável: verifique fontes, não compartilhe dados sensíveis em chats públicos e desconfie de deepfakes em golpes. Educação digital reduz riscos."
+        "pergunta": "IA e segurança: o que saber?",
+        "resposta": "## Inteligência artificial e segurança\n\nFerramentas de IA são úteis, mas também aparecem em golpes (deepfakes, textos falsos).\n\n**Como se proteger:**\n- Verifique informações em fontes oficiais.\n- Não envie dados sensíveis a chats públicos.\n- Desconfie de áudios e vídeos manipulados em cobranças."
       },
       {
         "palavras": [
@@ -798,7 +822,8 @@
           "dispositivo conectado",
           "smart home"
         ],
-        "resposta": "Dispositivos IoT (TV, câmeras, assistentes) devem ter senha padrão alterada, firmware atualizado e rede Wi-Fi segura."
+        "pergunta": "Como proteger dispositivos IoT?",
+        "resposta": "## Internet das Coisas (IoT)\n\nTVs, câmeras e assistentes conectados ampliam a superfície de ataque da sua rede.\n\n**Como se proteger:**\n- Troque senhas padrão de fábrica.\n- Mantenha firmware atualizado.\n- Separe rede de convidados no roteador, se possível."
       },
       {
         "palavras": [
@@ -807,7 +832,8 @@
           "lgpd",
           "vazamento"
         ],
-        "resposta": "Minimize dados compartilhados online, revise permissões de apps e altere senhas após vazamentos conhecidos. No Brasil, a LGPD orienta o tratamento de dados pessoais."
+        "pergunta": "Privacidade e vazamento de dados",
+        "resposta": "## Privacidade e LGPD\n\nNo Brasil, a LGPD orienta como empresas tratam dados pessoais.\n\n**Como se proteger:**\n- Minimize o que você publica nas redes.\n- Revise permissões de aplicativos.\n- Altere senhas após vazamentos conhecidos."
       },
       {
         "palavras": [
@@ -816,32 +842,79 @@
           "aprender programacao",
           "carreira ti"
         ],
-        "resposta": "Tecnologia e cibersegurança são áreas em crescimento. Cursos como TADS combinam desenvolvimento e boas práticas. Pratique em ambientes legais e éticos (laboratórios, CTFs autorizados)."
+        "pergunta": "Carreira em tecnologia e ética",
+        "resposta": "## Tecnologia e carreira\n\nÁreas como desenvolvimento e cibersegurança estão em alta — o curso TADS da AEMS forma profissionais nesse contexto.\n\n**Como se proteger:**\n- Pratique em laboratórios e projetos legítimos.\n- Participe de CTFs e eventos autorizados.\n- Nunca use conhecimento para prejudicar terceiros."
+      },
+      {
+        "palavras": [
+          "proteger celular",
+          "seguranca celular",
+          "smartphone seguro"
+        ],
+        "pergunta": "Como proteger meu celular?",
+        "resposta": "## Proteção do celular\n\nSmartphones concentram banco, mensagens e fotos — são alvo frequente de golpes.\n\n**Como se proteger:**\n- Ative bloqueio por biometria ou PIN.\n- Mantenha sistema e apps atualizados.\n- Baixe apps só na loja oficial.\n- Ative rastreamento remoto (Buscar iPhone / Encontre meu dispositivo)."
+      },
+      {
+        "palavras": [
+          "proteger pc",
+          "seguranca computador",
+          "proteger notebook"
+        ],
+        "pergunta": "Como proteger meu PC?",
+        "resposta": "## Proteção do computador\n\nPCs e notebooks armazenam documentos e acessos sensíveis.\n\n**Como se proteger:**\n- Use antivírus e firewall ativos.\n- Faça backup de arquivos importantes.\n- Evite software pirata e downloads duvidosos.\n- Desligue o PC quando não estiver em uso prolongado."
+      },
+      {
+        "palavras": [
+          "proteger roteador",
+          "wifi seguro",
+          "senha wifi"
+        ],
+        "pergunta": "Como proteger o roteador Wi-Fi?",
+        "resposta": "## Roteador e Wi-Fi\n\nO roteador é a porta de entrada da sua rede doméstica.\n\n**Como se proteger:**\n- Altere a senha padrão do painel administrativo.\n- Use WPA3 ou WPA2 com senha forte.\n- Atualize o firmware do fabricante.\n- Desative acesso remoto se não precisar."
+      },
+      {
+        "palavras": [
+          "ameacas pc",
+          "ameacas computador",
+          "risco pc",
+          "proteger pc"
+        ],
+        "pergunta": "Quais ameaças são comuns no PC?",
+        "resposta": "## Ameaças comuns — Computador (PC)\n\nSegundo o modelo da base, este tipo de dispositivo costuma enfrentar riscos específicos.\n\n**Ameaças frequentes no modelo:**\n- Malware\n- Ransomware\n- Trojan\n\n**Sintomas monitorados no modelo:** lento, superaquecimento, tela azul."
+      },
+      {
+        "palavras": [
+          "ameacas celular",
+          "risco celular",
+          "ameacas smartphone"
+        ],
+        "pergunta": "Quais ameaças são comuns no celular?",
+        "resposta": "## Ameaças comuns — Celular\n\nSegundo o modelo da base, este tipo de dispositivo costuma enfrentar riscos específicos.\n\n**Ameaças frequentes no modelo:**\n- Adware\n- Spyware\n\n**Sintomas monitorados no modelo:** apps fechando, bateria curta, superaquecimento."
       }
     ],
     "ameacaInfo": {
-      "malware": "Software malicioso que infecta dispositivos para roubar dados, espionar ou danificar arquivos. Mantenha antivírus atualizado e evite downloads de fontes desconhecidas.",
-      "ransomware": "Criptografa seus arquivos e exige pagamento para liberá-los. Não pague sem orientação profissional; priorize backups offline e denuncie à polícia.",
-      "spyware": "Espiona atividades sem consentimento (câmera, microfone, teclas). Revise permissões de apps e use antimalware confiável.",
-      "adware": "Exibe anúncios invasivos e pode redirecionar navegação. Remova extensões suspeitas e prefira lojas oficiais de aplicativos.",
-      "trojan": "Disfarça-se de programa legítimo para abrir portas a outros ataques. Só instale software de sites e lojas oficiais.",
-      "worm": "Propaga-se em redes sem ação do usuário. Mantenha roteador e sistemas atualizados e feche portas desnecessárias.",
-      "rootkit": "Oculta presença de invasores no sistema. Em suspeita, busque suporte técnico especializado e reinstale o SO se necessário.",
-      "keylogger": "Registra o que você digita. Use 2FA, gerenciador de senhas e evite instalar programas não confiáveis.",
-      "phishing": "Golpe que imita bancos, lojas ou contatos para roubar dados. Nunca clique em links suspeitos; confirme pelo canal oficial.",
-      "exploit": "Aproveita falhas de software não corrigidas. Aplique atualizações de segurança assim que disponíveis."
+      "malware": "## Malware\n\nSoftware malicioso que infecta dispositivos para roubar dados, espionar ou danificar arquivos.\n\n**Como se proteger:**\n- Mantenha antivírus e sistema atualizados.\n- Evite downloads e anexos de fontes desconhecidas.\n- Desconfie de pendrives e links encurtados.",
+      "ransomware": "## Ransomware\n\nCriptografa arquivos e exige pagamento para liberá-los — um dos golpes mais graves para pessoas e empresas.\n\n**Como se proteger:**\n- Faça backups regulares em mídia offline ou nuvem confiável.\n- Não abra anexos suspeitos em e-mails.\n- Mantenha cópias de documentos importantes fora do PC principal.\n\n**Atenção:** Não pague resgate sem orientação da polícia e de especialistas.",
+      "spyware": "## Spyware\n\nEspiona atividades sem consentimento: câmera, microfone, mensagens ou teclas digitadas.\n\n**Como se proteger:**\n- Revise permissões de aplicativos no celular.\n- Use antimalware confiável e lojas oficiais de apps.\n- Desative acessos remotos desnecessários.",
+      "adware": "## Adware\n\nExibe anúncios invasivos e pode redirecionar a páginas maliciosas.\n\n**Como se proteger:**\n- Remova extensões desconhecidas do navegador.\n- Instale apps somente em lojas oficiais.\n- Considere bloqueador de anúncios de fonte confiável.",
+      "trojan": "## Trojan (cavalo de Troia)\n\nDisfarça-se de programa legítimo para abrir portas a outros ataques.\n\n**Como se proteger:**\n- Baixe software apenas de sites e lojas oficiais.\n- Verifique o nome do desenvolvedor antes de instalar.\n- Escaneie arquivos recebidos antes de abrir.",
+      "worm": "## Worm\n\nPropaga-se em redes sem depender de ação direta do usuário.\n\n**Como se proteger:**\n- Atualize roteador, sistema e aplicativos.\n- Feche portas de rede desnecessárias.\n- Use senha forte no Wi-Fi doméstico.",
+      "rootkit": "## Rootkit\n\nOculta a presença de invasores no sistema, dificultando a detecção.\n\n**Como se proteger:**\n- Busque suporte técnico especializado em caso de suspeita.\n- Considere reinstalar o sistema após backup dos dados.\n- Troque senhas após limpeza do dispositivo.",
+      "keylogger": "## Keylogger\n\nRegistra tudo o que você digita, incluindo senhas e dados bancários.\n\n**Como se proteger:**\n- Ative autenticação em dois fatores.\n- Use gerenciador de senhas.\n- Não instale programas de origem duvidosa.",
+      "phishing": "## Phishing\n\nGolpe que imita bancos, lojas ou contatos para roubar dados e senhas.\n\n**Como se proteger:**\n- Não clique em links de e-mails ou SMS suspeitos.\n- Acesse sites digitando o endereço oficial no navegador.\n- Confirme pedidos de PIX ou senha por canal oficial.",
+      "exploit": "## Exploit\n\nAproveita falhas de software ainda não corrigidas pelo fabricante.\n\n**Como se proteger:**\n- Ative atualizações automáticas quando possível.\n- Não adie patches de segurança críticos.\n- Remova programas antigos que não usa mais."
     },
     "medidaInfo": {
-      "antivirus": "Detecta e remove programas maliciosos. Use soluções reconhecidas e mantenha as definições em dia.",
-      "firewall": "Filtra tráfego de rede suspeito. Ative no sistema e no roteador quando possível.",
-      "antimalware": "Complementa o antivírus em ameaças específicas, comum em celulares.",
-      "vpn": "Criptografa a conexão em redes públicas; não substitui boas práticas de senha.",
-      "backup": "Cópias regulares dos dados permitem recuperação após ransomware ou falhas.",
-      "autenticacao_2fatores": "Camada extra além da senha (app ou SMS). Ative em e-mail, banco e redes sociais.",
-      "criptografia": "Protege dados em repouso ou em trânsito; essencial em servidores e dados sensíveis.",
-      "atualizacoes": "Corrigem falhas exploradas por hackers. Configure atualizações automáticas quando seguro.",
-      "adblock": "Reduz exposição a anúncios maliciosos; use extensões de fontes confiáveis.",
-      "proxy": "Intermediário de rede; em contexto doméstico, prefira VPN para privacidade em Wi-Fi público."
+      "antivirus": "## Antivírus\n\nDetecta e remove programas maliciosos conhecidos.\n\n**Como se proteger:**\n- Use marcas reconhecidas.\n- Mantenha definições de vírus em dia.\n- Faça varreduras periódicas.",
+      "firewall": "## Firewall\n\nFiltra conexões de rede não autorizadas.\n\n**Como se proteger:**\n- Ative no sistema operacional.\n- Revise regras do roteador.\n- Bloqueie portas desnecessárias.",
+      "antimalware": "## Antimalware\n\nComplementa o antivírus em ameaças específicas, comum em celulares.\n\n**Como se proteger:**\n- Combine com boas práticas de download.\n- Revise apps com permissões excessivas.",
+      "vpn": "## VPN\n\nCriptografa o tráfego em redes públicas.\n\n**Como se proteger:**\n- Use em Wi-Fi de aeroporto, shopping e cafés.\n- Prefira serviços pagos e transparentes em política de privacidade.\n\n**Atenção:** VPN não substitui senhas fortes nem atualizações.",
+      "backup": "## Backup\n\nCópias dos dados permitem recuperação após ransomware ou falhas.\n\n**Como se proteger:**\n- Agende backups automáticos.\n- Guarde uma cópia offline ou desconectada.\n- Teste a restauração de tempos em tempos.",
+      "autenticacao_2fatores": "## Autenticação em dois fatores (2FA)\n\nExige um segundo passo além da senha (app, SMS ou chave).\n\n**Como se proteger:**\n- Ative em e-mail, banco e redes sociais.\n- Prefira app autenticador em vez de SMS quando possível.",
+      "criptografia": "## Criptografia\n\nProtege dados em repouso ou em trânsito contra leitura indevida.\n\n**Como se proteger:**\n- Essencial em servidores e notebooks corporativos.\n- Use HTTPS em sites que você acessa.",
+      "atualizacoes": "## Atualizações de segurança\n\nCorrigem falhas exploradas por criminosos.\n\n**Como se proteger:**\n- Configure atualizações automáticas.\n- Reinicie o dispositivo após patches importantes.",
+      "adblock": "## Bloqueador de anúncios\n\nReduz exposição a anúncios maliciosos e rastreadores.\n\n**Como se proteger:**\n- Use extensões de desenvolvedores confiáveis.\n- Permita anúncios em sites que deseja apoiar.",
+      "proxy": "## Proxy\n\nIntermediário de rede; em casa, VPN costuma ser mais adequada para privacidade.\n\n**Como se proteger:**\n- Evite proxies gratuitos desconhecidos.\n- Leia a política de privacidade do serviço."
     },
     "dispositivoAliases": {
       "pc": [
@@ -897,11 +970,28 @@
     },
     "sugestoes": [
       "O que é phishing?",
-      "Como proteger meu celular?",
-      "Quais ameaças são comuns no PC?",
+      "O que é malware?",
+      "Como evitar WhatsApp clonado?",
+      "Golpe de ligação: o que fazer?",
+      "O que é engenharia social?",
+      "Como criar senhas seguras?",
+      "Devo usar autenticação em dois fatores?",
       "Como denunciar um golpe?",
+      "Por que fazer backup?",
+      "VPN em rede pública: preciso?",
+      "Por que atualizar o sistema?",
+      "O que é firewall?",
       "O que é ransomware?",
-      "Devo usar autenticação em dois fatores?"
+      "Golpe com criptomoeda ou PIX",
+      "IA e segurança: o que saber?",
+      "Como proteger dispositivos IoT?",
+      "Privacidade e vazamento de dados",
+      "Carreira em tecnologia e ética",
+      "Como proteger meu celular?",
+      "Como proteger meu PC?",
+      "Como proteger o roteador Wi-Fi?",
+      "Quais ameaças são comuns no PC?",
+      "Quais ameaças são comuns no celular?"
     ]
   }
 }

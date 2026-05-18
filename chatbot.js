@@ -18,8 +18,87 @@ document.addEventListener('DOMContentLoaded', function () {
       .replace(/[\u0300-\u036f]/g, '');
   }
 
-  function paresPrimeiro(pares, primeiro) {
-    return [...new Set(pares.filter(([a]) => a === primeiro).map(([, b]) => b))];
+  function escapeHtml(text) {
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  function inlineFormat(text) {
+    return escapeHtml(text).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  }
+
+  /** Converte markdown leve (##, listas, parágrafos) em HTML estruturado. */
+  function formatMessageHtml(text) {
+    if (!text || !text.trim()) return '';
+
+    const blocks = text.trim().split(/\n\n+/);
+    const parts = [];
+
+    for (const block of blocks) {
+      const lines = block.split('\n').map((l) => l.trim()).filter(Boolean);
+      if (!lines.length) continue;
+
+      if (lines[0].startsWith('## ')) {
+        parts.push(`<h3 class="chat-msg-title">${inlineFormat(lines[0].slice(3))}</h3>`);
+        const rest = lines.slice(1);
+        if (rest.length) parts.push(renderBlockLines(rest));
+        continue;
+      }
+
+      if (lines[0].startsWith('**Atenção:**') || lines[0].startsWith('**Atencao:**')) {
+        parts.push(`<p class="chat-msg-alert">${inlineFormat(lines.join(' '))}</p>`);
+        continue;
+      }
+
+      parts.push(renderBlockLines(lines));
+    }
+
+    return parts.join('');
+  }
+
+  function renderBlockLines(lines) {
+    const listItems = lines.filter((l) => /^[-•]\s/.test(l));
+    if (listItems.length === lines.length) {
+      const items = listItems.map((l) => `<li>${inlineFormat(l.replace(/^[-•]\s*/, ''))}</li>`);
+      return `<ul class="chat-msg-list">${items.join('')}</ul>`;
+    }
+
+    const html = [];
+    let buffer = [];
+    let inList = false;
+
+    function flushParagraph() {
+      if (buffer.length) {
+        html.push(`<p class="chat-msg-p">${inlineFormat(buffer.join(' '))}</p>`);
+        buffer = [];
+      }
+    }
+
+    function flushList() {
+      if (inList) {
+        html.push('</ul>');
+        inList = false;
+      }
+    }
+
+    for (const line of lines) {
+      if (/^[-•]\s/.test(line)) {
+        flushParagraph();
+        if (!inList) {
+          html.push('<ul class="chat-msg-list">');
+          inList = true;
+        }
+        html.push(`<li>${inlineFormat(line.replace(/^[-•]\s*/, ''))}</li>`);
+      } else {
+        flushList();
+        buffer.push(line);
+      }
+    }
+    flushList();
+    flushParagraph();
+    return html.join('');
   }
 
   function ameacasDoDispositivo(comum, d) {
@@ -38,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function sintomasDe(sintomas, d) {
-    return paresPrimeiro(sintomas, d).sort();
+    return [...new Set(sintomas.filter(([dev]) => dev === d).map(([, s]) => s.replace(/_/g, ' ')))].sort();
   }
 
   function vulneravel(comum, d) {
@@ -110,61 +189,86 @@ document.addEventListener('DOMContentLoaded', function () {
       .filter(([d]) => d === devId)
       .map(([, m]) => medidaLabels[m] || m);
 
-    const partes = [
-      `Na base de conhecimento, **${label}** tem nível de proteção exemplo: **${NIVEL_LABEL[nivel]}**.`,
+    const linhas = [
+      `## Proteção — ${label}`,
+      '',
+      `Nível de proteção (exemplo na base): **${NIVEL_LABEL[nivel]}**.`,
     ];
-    if (ameacas.length) partes.push('Ameaças comuns a este tipo: ' + ameacas.join(', ') + '.');
-    if (sint.length) partes.push('Sintomas registrados no modelo: ' + sint.join(', ') + '.');
-    if (medidas.length) partes.push('Medidas de exemplo já associadas: ' + medidas.join(', ') + '.');
-    else partes.push('No exemplo da base, não há medidas listadas — priorize antivírus, firewall e backups.');
+    if (ameacas.length) linhas.push('', `**Ameaças comuns:** ${ameacas.join(', ')}.`);
+    if (sint.length) linhas.push('', `**Sintomas no modelo:** ${sint.join(', ')}.`);
+
+    linhas.push('', '**Recomendações:**');
+    if (medidas.length) linhas.push(`- Medidas no exemplo: ${medidas.join(', ')}.`);
+    else linhas.push('- Priorize antivírus, firewall e backups.');
     if (recomenda2fa(instalado, dispositivos, devId)) {
-      partes.push('Recomendação: ative autenticação em dois fatores.');
+      linhas.push('- Ative autenticação em dois fatores.');
     }
-    if (recomendaBackup(comum, devId)) {
-      partes.push('Recomendação: mantenha backups atualizados.');
-    }
+    if (recomendaBackup(comum, devId)) linhas.push('- Mantenha backups atualizados.');
     if (exposto(comum, instalado, dispositivos, devId)) {
-      partes.push('Alerta: perfil vulnerável sem medidas no modelo — reforce proteção básica.');
+      linhas.push('', '**Atenção:** Perfil vulnerável no modelo — reforce proteção básica.');
     }
-    return partes.join(' ');
+    return linhas.join('\n');
+  }
+
+  function respostaSintoma(sintoma, kbData) {
+    const ams = [
+      ...new Set(kbData.indicaAmeaca.filter(([s]) => s === sintoma).map(([, a]) => a)),
+    ].sort();
+    const nomes = ams.map((a) => kbData.ameacaLabels[a] || a);
+    const linhas = [
+      `## Sintoma: ${sintoma.replace(/_/g, ' ')}`,
+      '',
+      'No modelo da base, este sinal pode estar associado às ameaças abaixo.',
+      '',
+      '**Possíveis ameaças (modelo):**',
+    ];
+    for (const n of nomes) linhas.push(`- ${n}`);
+    linhas.push('', '**Atenção:** Não substitui diagnóstico técnico — procure suporte especializado.');
+    return linhas.join('\n');
   }
 
   function responderChat(mensagem, kbData) {
     const texto = mensagem.trim();
     const bot = kbData.chatbot;
     const ameacaLabels = kbData.ameacaLabels;
+    const fix = bot.respostasFixas || {};
 
-    if (!texto) {
-      return 'Digite sua dúvida sobre tecnologia, dispositivos ou segurança digital. Estou aqui para orientar de forma ética.';
-    }
+    if (!texto) return fix.vazia || 'Digite sua dúvida.';
 
     const norm = normalizarTexto(texto);
     const bloqueio = verificarBloqueioEtico(norm, bot.bloqueioEtico);
     if (bloqueio) return bloqueio;
 
     if (['ola', 'oi', 'bom dia', 'boa tarde', 'boa noite', 'e ai'].some((s) => norm.includes(s))) {
-      return (
-        'Olá! Sou o assistente AEMS sobre tecnologia e cibersegurança. ' +
-        'Pergunte sobre golpes, ameaças, proteção de dispositivos ou boas práticas. ' +
-        'Não ajudo com atividades ilegais.'
-      );
+      return fix.saudacao || bot.mensagemBoasVindas;
     }
 
     if (['obrigado', 'valeu', 'agradeco'].some((s) => norm.includes(s))) {
-      return 'Por nada! Se tiver outra dúvida sobre segurança digital, é só perguntar.';
+      return fix.agradecimento || 'Por nada!';
+    }
+
+    for (const faq of bot.faqs || []) {
+      const perguntaNorm = normalizarTexto(faq.pergunta || '');
+      if (perguntaNorm === norm || norm === perguntaNorm.replace(/\?$/, '')) {
+        return faq.resposta;
+      }
     }
 
     const ameaca = detectarAmeaca(norm, ameacaLabels);
-    if (
-      ameaca &&
-      ['o que e', 'oque e', 'definicao', 'defina', 'explique', 'significa'].some((s) => norm.includes(s))
-    ) {
-      const info = bot.ameacaInfo[ameaca] || '';
-      return `**${ameacaLabels[ameaca]}**: ${info}`;
-    }
+    if (ameaca && bot.ameacaInfo[ameaca]) return bot.ameacaInfo[ameaca];
 
-    if (ameaca && bot.ameacaInfo[ameaca]) {
-      return `**${ameacaLabels[ameaca]}**: ${bot.ameacaInfo[ameaca]}`;
+    for (const [codigo, textoFmt] of Object.entries(bot.medidaInfo || {})) {
+      const label = (kbData.medidaLabels && kbData.medidaLabels[codigo]) || codigo;
+      const labelNorm = normalizarTexto(label);
+      if (
+        norm.includes(codigo) ||
+        norm.includes(codigo.replace(/_/g, ' ')) ||
+        norm.includes(labelNorm)
+      ) {
+        if (['o que e', 'oque e', 'definicao', 'explique', 'como', 'para que'].some((s) => norm.includes(s))) {
+          return textoFmt;
+        }
+      }
     }
 
     const dev = detectarDispositivo(norm, bot.dispositivoAliases);
@@ -180,16 +284,7 @@ document.addEventListener('DOMContentLoaded', function () {
     for (const [sintoma] of kbData.indicaAmeaca) {
       const sintomaEspaco = sintoma.replace(/_/g, ' ');
       if (norm.includes(sintomaEspaco) || norm.includes(sintoma)) {
-        const ams = [
-          ...new Set(kbData.indicaAmeaca.filter(([s]) => s === sintoma).map(([, a]) => a)),
-        ].sort();
-        if (ams.length) {
-          const nomes = ams.map((a) => ameacaLabels[a] || a).join(', ');
-          return (
-            `O sintoma «${sintomaEspaco}» no modelo pode indicar: ${nomes}. ` +
-            'Isso não substitui diagnóstico técnico — em dúvida, procure suporte especializado.'
-          );
-        }
+        return respostaSintoma(sintoma, kbData);
       }
     }
 
@@ -197,33 +292,27 @@ document.addEventListener('DOMContentLoaded', function () {
     if (faqs.length && faqs[0].pts >= 1) return faqs[0].resposta;
 
     if (['ajuda', 'help', 'duvida', 'nao sei'].some((s) => norm.includes(s))) {
-      const sugest = bot.sugestoes.slice(0, 5).map((s) => `• ${s}`).join('\n');
-      return `Posso ajudar com golpes, ameaças, senhas e proteção de dispositivos. Exemplos:\n${sugest}`;
+      return fix.ajuda || fix.fallback;
     }
 
-    return (
-      'Não encontrei um tema exato na base, mas posso ajudar com cibersegurança e tecnologia em geral. ' +
-      'Tente perguntar sobre phishing, malware, senhas, backup, VPN ou proteção de um dispositivo (PC, celular, roteador). ' +
-      'Lembro que não oriento invasões ou atividades ilegais.'
-    );
-  }
-
-  function formatMessageHtml(text) {
-    const escaped = text
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
-    return escaped.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+    return fix.fallback || 'Tente outra pergunta sobre segurança digital.';
   }
 
   function appendMessage(role, text) {
-    const div = document.createElement('div');
-    div.className = `chat-message chat-message-${role}`;
+    const wrap = document.createElement('div');
+    wrap.className = `chat-message chat-message-${role}`;
+
+    const label = document.createElement('span');
+    label.className = 'chat-message-label';
+    label.textContent = role === 'user' ? 'Você' : 'Assistente AEMS';
+
     const bubble = document.createElement('div');
     bubble.className = 'chat-bubble';
     bubble.innerHTML = formatMessageHtml(text);
-    div.appendChild(bubble);
-    messagesEl.appendChild(div);
+
+    wrap.appendChild(label);
+    wrap.appendChild(bubble);
+    messagesEl.appendChild(wrap);
     messagesEl.scrollTop = messagesEl.scrollHeight;
   }
 
@@ -232,9 +321,12 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!trimmed || !kb) return;
     appendMessage('user', trimmed);
     inputEl.value = '';
+    sendBtn.disabled = true;
     setTimeout(() => {
       appendMessage('bot', responderChat(trimmed, kb));
-    }, 120);
+      sendBtn.disabled = false;
+      inputEl.focus();
+    }, 180);
   }
 
   function renderSuggestions(sugestoes) {
@@ -254,8 +346,9 @@ document.addEventListener('DOMContentLoaded', function () {
     statusEl.textContent = '';
     sendBtn.disabled = false;
     inputEl.disabled = false;
-    renderSuggestions(kbData.chatbot.sugestoes);
+    renderSuggestions(kbData.chatbot.sugestoes || []);
     appendMessage('bot', kbData.chatbot.mensagemBoasVindas);
+    inputEl.focus();
   }
 
   sendBtn.addEventListener('click', () => sendUserMessage(inputEl.value));

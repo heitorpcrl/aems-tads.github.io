@@ -287,30 +287,184 @@ MEDIDA_LABELS: Dict[str, str] = {
     "proxy": "Proxy",
 }
 
+def _fmt_chat(
+    titulo: str,
+    *paragrafos: str,
+    lista: Tuple[str, ...] = (),
+    titulo_lista: str = "Como se proteger",
+    alerta: str = "",
+) -> str:
+    """Markdown leve para o chat: ## título, **negrito**, listas com -."""
+    linhas: List[str] = [f"## {titulo}", ""]
+    for p in paragrafos:
+        linhas.append(p)
+        linhas.append("")
+    if lista:
+        linhas.append(f"**{titulo_lista}:**")
+        for item in lista:
+            linhas.append(f"- {item}")
+        linhas.append("")
+    if alerta:
+        linhas.append(f"**Atenção:** {alerta}")
+    return "\n".join(linhas).strip()
+
+
 AMEACA_INFO: Dict[str, str] = {
-    "malware": "Software malicioso que infecta dispositivos para roubar dados, espionar ou danificar arquivos. Mantenha antivírus atualizado e evite downloads de fontes desconhecidas.",
-    "ransomware": "Criptografa seus arquivos e exige pagamento para liberá-los. Não pague sem orientação profissional; priorize backups offline e denuncie à polícia.",
-    "spyware": "Espiona atividades sem consentimento (câmera, microfone, teclas). Revise permissões de apps e use antimalware confiável.",
-    "adware": "Exibe anúncios invasivos e pode redirecionar navegação. Remova extensões suspeitas e prefira lojas oficiais de aplicativos.",
-    "trojan": "Disfarça-se de programa legítimo para abrir portas a outros ataques. Só instale software de sites e lojas oficiais.",
-    "worm": "Propaga-se em redes sem ação do usuário. Mantenha roteador e sistemas atualizados e feche portas desnecessárias.",
-    "rootkit": "Oculta presença de invasores no sistema. Em suspeita, busque suporte técnico especializado e reinstale o SO se necessário.",
-    "keylogger": "Registra o que você digita. Use 2FA, gerenciador de senhas e evite instalar programas não confiáveis.",
-    "phishing": "Golpe que imita bancos, lojas ou contatos para roubar dados. Nunca clique em links suspeitos; confirme pelo canal oficial.",
-    "exploit": "Aproveita falhas de software não corrigidas. Aplique atualizações de segurança assim que disponíveis.",
+    "malware": _fmt_chat(
+        "Malware",
+        "Software malicioso que infecta dispositivos para roubar dados, espionar ou danificar arquivos.",
+        lista=(
+            "Mantenha antivírus e sistema atualizados.",
+            "Evite downloads e anexos de fontes desconhecidas.",
+            "Desconfie de pendrives e links encurtados.",
+        ),
+    ),
+    "ransomware": _fmt_chat(
+        "Ransomware",
+        "Criptografa arquivos e exige pagamento para liberá-los — um dos golpes mais graves para pessoas e empresas.",
+        lista=(
+            "Faça backups regulares em mídia offline ou nuvem confiável.",
+            "Não abra anexos suspeitos em e-mails.",
+            "Mantenha cópias de documentos importantes fora do PC principal.",
+        ),
+        alerta="Não pague resgate sem orientação da polícia e de especialistas.",
+    ),
+    "spyware": _fmt_chat(
+        "Spyware",
+        "Espiona atividades sem consentimento: câmera, microfone, mensagens ou teclas digitadas.",
+        lista=(
+            "Revise permissões de aplicativos no celular.",
+            "Use antimalware confiável e lojas oficiais de apps.",
+            "Desative acessos remotos desnecessários.",
+        ),
+    ),
+    "adware": _fmt_chat(
+        "Adware",
+        "Exibe anúncios invasivos e pode redirecionar a páginas maliciosas.",
+        lista=(
+            "Remova extensões desconhecidas do navegador.",
+            "Instale apps somente em lojas oficiais.",
+            "Considere bloqueador de anúncios de fonte confiável.",
+        ),
+    ),
+    "trojan": _fmt_chat(
+        "Trojan (cavalo de Troia)",
+        "Disfarça-se de programa legítimo para abrir portas a outros ataques.",
+        lista=(
+            "Baixe software apenas de sites e lojas oficiais.",
+            "Verifique o nome do desenvolvedor antes de instalar.",
+            "Escaneie arquivos recebidos antes de abrir.",
+        ),
+    ),
+    "worm": _fmt_chat(
+        "Worm",
+        "Propaga-se em redes sem depender de ação direta do usuário.",
+        lista=(
+            "Atualize roteador, sistema e aplicativos.",
+            "Feche portas de rede desnecessárias.",
+            "Use senha forte no Wi-Fi doméstico.",
+        ),
+    ),
+    "rootkit": _fmt_chat(
+        "Rootkit",
+        "Oculta a presença de invasores no sistema, dificultando a detecção.",
+        lista=(
+            "Busque suporte técnico especializado em caso de suspeita.",
+            "Considere reinstalar o sistema após backup dos dados.",
+            "Troque senhas após limpeza do dispositivo.",
+        ),
+    ),
+    "keylogger": _fmt_chat(
+        "Keylogger",
+        "Registra tudo o que você digita, incluindo senhas e dados bancários.",
+        lista=(
+            "Ative autenticação em dois fatores.",
+            "Use gerenciador de senhas.",
+            "Não instale programas de origem duvidosa.",
+        ),
+    ),
+    "phishing": _fmt_chat(
+        "Phishing",
+        "Golpe que imita bancos, lojas ou contatos para roubar dados e senhas.",
+        lista=(
+            "Não clique em links de e-mails ou SMS suspeitos.",
+            "Acesse sites digitando o endereço oficial no navegador.",
+            "Confirme pedidos de PIX ou senha por canal oficial.",
+        ),
+    ),
+    "exploit": _fmt_chat(
+        "Exploit",
+        "Aproveita falhas de software ainda não corrigidas pelo fabricante.",
+        lista=(
+            "Ative atualizações automáticas quando possível.",
+            "Não adie patches de segurança críticos.",
+            "Remova programas antigos que não usa mais.",
+        ),
+    ),
 }
 
 MEDIDA_INFO: Dict[str, str] = {
-    "antivirus": "Detecta e remove programas maliciosos. Use soluções reconhecidas e mantenha as definições em dia.",
-    "firewall": "Filtra tráfego de rede suspeito. Ative no sistema e no roteador quando possível.",
-    "antimalware": "Complementa o antivírus em ameaças específicas, comum em celulares.",
-    "vpn": "Criptografa a conexão em redes públicas; não substitui boas práticas de senha.",
-    "backup": "Cópias regulares dos dados permitem recuperação após ransomware ou falhas.",
-    "autenticacao_2fatores": "Camada extra além da senha (app ou SMS). Ative em e-mail, banco e redes sociais.",
-    "criptografia": "Protege dados em repouso ou em trânsito; essencial em servidores e dados sensíveis.",
-    "atualizacoes": "Corrigem falhas exploradas por hackers. Configure atualizações automáticas quando seguro.",
-    "adblock": "Reduz exposição a anúncios maliciosos; use extensões de fontes confiáveis.",
-    "proxy": "Intermediário de rede; em contexto doméstico, prefira VPN para privacidade em Wi-Fi público.",
+    "antivirus": _fmt_chat(
+        "Antivírus",
+        "Detecta e remove programas maliciosos conhecidos.",
+        lista=("Use marcas reconhecidas.", "Mantenha definições de vírus em dia.", "Faça varreduras periódicas."),
+    ),
+    "firewall": _fmt_chat(
+        "Firewall",
+        "Filtra conexões de rede não autorizadas.",
+        lista=("Ative no sistema operacional.", "Revise regras do roteador.", "Bloqueie portas desnecessárias."),
+    ),
+    "antimalware": _fmt_chat(
+        "Antimalware",
+        "Complementa o antivírus em ameaças específicas, comum em celulares.",
+        lista=("Combine com boas práticas de download.", "Revise apps com permissões excessivas."),
+    ),
+    "vpn": _fmt_chat(
+        "VPN",
+        "Criptografa o tráfego em redes públicas.",
+        lista=(
+            "Use em Wi-Fi de aeroporto, shopping e cafés.",
+            "Prefira serviços pagos e transparentes em política de privacidade.",
+        ),
+        alerta="VPN não substitui senhas fortes nem atualizações.",
+    ),
+    "backup": _fmt_chat(
+        "Backup",
+        "Cópias dos dados permitem recuperação após ransomware ou falhas.",
+        lista=(
+            "Agende backups automáticos.",
+            "Guarde uma cópia offline ou desconectada.",
+            "Teste a restauração de tempos em tempos.",
+        ),
+    ),
+    "autenticacao_2fatores": _fmt_chat(
+        "Autenticação em dois fatores (2FA)",
+        "Exige um segundo passo além da senha (app, SMS ou chave).",
+        lista=(
+            "Ative em e-mail, banco e redes sociais.",
+            "Prefira app autenticador em vez de SMS quando possível.",
+        ),
+    ),
+    "criptografia": _fmt_chat(
+        "Criptografia",
+        "Protege dados em repouso ou em trânsito contra leitura indevida.",
+        lista=("Essencial em servidores e notebooks corporativos.", "Use HTTPS em sites que você acessa."),
+    ),
+    "atualizacoes": _fmt_chat(
+        "Atualizações de segurança",
+        "Corrigem falhas exploradas por criminosos.",
+        lista=("Configure atualizações automáticas.", "Reinicie o dispositivo após patches importantes."),
+    ),
+    "adblock": _fmt_chat(
+        "Bloqueador de anúncios",
+        "Reduz exposição a anúncios maliciosos e rastreadores.",
+        lista=("Use extensões de desenvolvedores confiáveis.", "Permita anúncios em sites que deseja apoiar."),
+    ),
+    "proxy": _fmt_chat(
+        "Proxy",
+        "Intermediário de rede; em casa, VPN costuma ser mais adequada para privacidade.",
+        lista=("Evite proxies gratuitos desconhecidos.", "Leia a política de privacidade do serviço."),
+    ),
 }
 
 DISPOSITIVO_ALIASES: Dict[str, Tuple[str, ...]] = {
@@ -329,123 +483,353 @@ DISPOSITIVO_ALIASES: Dict[str, Tuple[str, ...]] = {
 CHAT_BLOQUEIO_ETICO: Tuple[Tuple[Tuple[str, ...], str], ...] = (
     (
         ("hackear", "hacker", "invadir", "invasao", "invadir conta", "roubar senha", "quebrar senha"),
-        "Não posso ajudar com invasão, roubo de contas ou qualquer atividade ilegal. "
-        "Se você suspeita de crime digital, denuncie na Delegacia Virtual e procure orientação legal. "
-        "Posso explicar como se proteger de golpes e ameaças de forma ética.",
+        _fmt_chat(
+            "Conteúdo não permitido",
+            "Não posso ajudar com invasão, roubo de contas ou qualquer atividade ilegal.",
+            lista=(
+                "Denuncie crimes digitais na Delegacia Virtual.",
+                "Pergunte como se proteger de golpes e ameaças.",
+            ),
+        ),
     ),
     (
         ("criar virus", "criar malware", "keylogger", "ransomware proprio", "phishing falso", "golpe passo"),
-        "Não forneço instruções para criar malware, golpes ou ferramentas de ataque. "
-        "Posso explicar como reconhecer essas ameaças e se prevenir.",
+        _fmt_chat(
+            "Conteúdo não permitido",
+            "Não forneço instruções para criar malware, golpes ou ferramentas de ataque.",
+            lista=(
+                "Posso explicar como reconhecer essas ameaças.",
+                "Posso orientar medidas de prevenção e denúncia.",
+            ),
+        ),
     ),
     (
         ("piratear", "crack", "warez", "serial ilegal"),
-        "Software pirata costuma trazer malware e viola direitos autorais. "
-        "Recomendo usar programas oficiais, gratuitos ou com licença legítima.",
+        _fmt_chat(
+            "Software ilegal",
+            "Programas piratas costumam trazer malware e violam direitos autorais.",
+            lista=(
+                "Prefira software oficial, gratuito ou com licença legítima.",
+                "Use lojas e sites do fabricante.",
+            ),
+        ),
     ),
 )
 
-CHAT_FAQS: Tuple[Tuple[Tuple[str, ...], str], ...] = (
+# (palavras-chave, pergunta sugerida, resposta formatada)
+CHAT_FAQS: Tuple[Tuple[Tuple[str, ...], str, str], ...] = (
     (
         ("phishing", "golpe email", "link falso", "email suspeito"),
-        "Phishing imita instituições confiáveis por e-mail ou mensagem com links falsos. "
-        "Não clique em links de remetentes desconhecidos; acesse o site digitando o endereço oficial. "
-        "Ative autenticação em dois fatores e denuncie tentativas de golpe.",
+        "O que é phishing?",
+        _fmt_chat(
+            "Phishing",
+            "Golpistas imitam bancos, lojas ou contatos por e-mail, SMS ou redes sociais com links falsos.",
+            lista=(
+                "Não clique em links de remetentes desconhecidos.",
+                "Digite o endereço do site manualmente no navegador.",
+                "Ative autenticação em dois fatores.",
+                "Denuncie tentativas ao banco ou à polícia.",
+            ),
+        ),
     ),
     (
         ("malware", "virus", "vírus", "programa malicioso"),
-        "Malware inclui vírus, trojans e spyware instalados sem seu consentimento. "
-        "Evite anexos suspeitos, mantenha o sistema atualizado e use antivírus confiável. "
-        "Em caso de infecção, desconecte da rede e busque suporte técnico.",
+        "O que é malware?",
+        AMEACA_INFO["malware"],
     ),
     (
-        ("whatsapp clonado", "whatsapp clonagem", "clonar whats", "pix golpe"),
-        "No golpe do WhatsApp clonado, criminosos pedem dinheiro fingindo ser você. "
-        "Ative verificação em duas etapas, não compartilhe códigos SMS e avise contatos se for vítima. "
-        "Denuncie transações fraudulentas ao banco imediatamente.",
+        ("whatsapp clonado", "whatsapp clonagem", "clonar whats", "pix golpe whats"),
+        "Como evitar WhatsApp clonado?",
+        _fmt_chat(
+            "Golpe do WhatsApp clonado",
+            "Criminosos assumem sua conta e pedem PIX a contatos fingindo ser você.",
+            lista=(
+                "Ative verificação em duas etapas no WhatsApp.",
+                "Nunca compartilhe códigos SMS com terceiros.",
+                "Avise amigos e família se for vítima.",
+                "Denuncie transações fraudulentas ao banco na hora.",
+            ),
+        ),
     ),
     (
-        ("ligacao golpe", "ligacao falsa", "suporte falso", "engenharia social"),
-        "Golpistas se passam por banco ou suporte e pedem senhas ou instalação de apps remotos. "
-        "Bancos não pedem senha por telefone. Desligue e ligue você mesmo para o número oficial.",
+        ("ligacao golpe", "ligacao falsa", "suporte falso"),
+        "Golpe de ligação: o que fazer?",
+        _fmt_chat(
+            "Ligações fraudulentas",
+            "Golpistas se passam por banco, Receita ou suporte técnico para roubar dados.",
+            lista=(
+                "Bancos não pedem senha por telefone.",
+                "Desligue e ligue você para o número oficial do cartão.",
+                "Não instale programas por ordem de desconhecidos.",
+            ),
+        ),
+    ),
+    (
+        ("engenharia social", "manipulacao", "golpe telefone"),
+        "O que é engenharia social?",
+        _fmt_chat(
+            "Engenharia social",
+            "Manipulação psicológica para obter dados, dinheiro ou acesso a sistemas.",
+            lista=(
+                "Desconfie de urgência e prêmios inesperados.",
+                "Confirme identidade por canal oficial.",
+                "Não transfira PIX sem validar quem está do outro lado.",
+            ),
+        ),
     ),
     (
         ("senha segura", "senha forte", "gerenciador de senha", "senhas diferentes"),
-        "Use senhas longas e únicas por serviço; um gerenciador de senhas ajuda a guardá-las com segurança. "
-        "Ative autenticação em dois fatores sempre que disponível.",
+        "Como criar senhas seguras?",
+        _fmt_chat(
+            "Senhas seguras",
+            "Senhas fracas ou repetidas são uma das principais portas de entrada para golpes.",
+            lista=(
+                "Use senhas longas e únicas por serviço.",
+                "Adote um gerenciador de senhas confiável.",
+                "Ative autenticação em dois fatores.",
+                "Nunca compartilhe senhas com outras pessoas.",
+            ),
+        ),
     ),
     (
         ("autenticacao dois fatores", "2fa", "dois fatores", "verificacao dupla"),
-        "A autenticação em dois fatores exige algo além da senha (app ou código). "
-        "Ative em e-mail, redes sociais e contas financeiras — é uma das medidas mais eficazes.",
+        "Devo usar autenticação em dois fatores?",
+        MEDIDA_INFO["autenticacao_2fatores"],
     ),
     (
         ("denunciar golpe", "denuncia", "boletim", "delegacia virtual", "como denunciar"),
-        "Reúna prints e mensagens, registre boletim na Delegacia Virtual, avise bancos envolvidos "
-        "e use Consumidor.gov.br ou Procon quando aplicável. Em emergência, procure a Polícia Civil ou Federal.",
+        "Como denunciar um golpe?",
+        _fmt_chat(
+            "Como denunciar um golpe no Brasil",
+            "Agir rápido aumenta a chance de bloquear prejuízos e ajudar investigações.",
+            lista=(
+                "Reúna prints, e-mails e comprovantes.",
+                "Registre boletim na Delegacia Virtual.",
+                "Comunique bancos e empresas envolvidas.",
+                "Use Consumidor.gov.br ou Procon quando for caso de consumo.",
+            ),
+            alerta="Em emergência, procure a Polícia Civil ou Federal.",
+        ),
     ),
     (
         ("backup", "copia de seguranca", "reserva de dados"),
-        "Faça backups regulares em nuvem confiável ou disco externo desconectado após a cópia. "
-        "Isso protege contra ransomware e falhas de hardware.",
+        "Por que fazer backup?",
+        MEDIDA_INFO["backup"],
     ),
     (
         ("vpn", "rede publica", "wifi publico", "wi-fi publico"),
-        "Em redes públicas, evite acessar banco sem VPN confiável e prefira dados móveis quando possível. "
-        "VPN não substitui senhas fortes e atualizações.",
+        "VPN em rede pública: preciso?",
+        MEDIDA_INFO["vpn"],
     ),
     (
         ("atualizacao", "atualizar sistema", "patch", "atualizacoes"),
-        "Atualizações corrigem falhas usadas por hackers. Configure atualizações automáticas em SO e apps.",
+        "Por que atualizar o sistema?",
+        MEDIDA_INFO["atualizacoes"],
     ),
     (
         ("firewall",),
-        "O firewall bloqueia conexões não autorizadas. Mantenha ativo no Windows/macOS/Linux e revise regras do roteador.",
+        "O que é firewall?",
+        MEDIDA_INFO["firewall"],
     ),
     (
         ("ransomware", "resgate", "arquivo criptografado"),
-        "Não pague resgate sem orientação especializada. Isole o dispositivo, preserve evidências e denuncie. "
-        "Backups recentes são a melhor recuperação.",
-    ),
-    (
-        ("engenharia social",),
-        "Manipulação psicológica para obter dados ou acesso. Desconfie de urgência, prêmios falsos e pedidos de PIX. "
-        "Confirme identidade por canal oficial antes de agir.",
+        "O que é ransomware?",
+        AMEACA_INFO["ransomware"],
     ),
     (
         ("criptomoeda golpe", "bitcoin golpe", "pix golpe idoso"),
-        "Golpes com criptomoedas usam pressão e falsa autoridade. Nunca transfira por ordem de desconhecidos. "
-        "Converse com familiares e denuncie se já for vítima.",
+        "Golpe com criptomoeda ou PIX",
+        _fmt_chat(
+            "Golpes financeiros online",
+            "Criminosos usam pressão, falsas autoridades ou investimentos milagrosos.",
+            lista=(
+                "Nunca transfira por ordem de desconhecidos.",
+                "Converse com familiares antes de decisões urgentes.",
+                "Denuncie se já for vítima.",
+            ),
+        ),
     ),
     (
         ("inteligencia artificial", "ia", "chatgpt", "tecnologia futuro"),
-        "A IA na tecnologia exige uso responsável: verifique fontes, não compartilhe dados sensíveis em chats públicos "
-        "e desconfie de deepfakes em golpes. Educação digital reduz riscos.",
+        "IA e segurança: o que saber?",
+        _fmt_chat(
+            "Inteligência artificial e segurança",
+            "Ferramentas de IA são úteis, mas também aparecem em golpes (deepfakes, textos falsos).",
+            lista=(
+                "Verifique informações em fontes oficiais.",
+                "Não envie dados sensíveis a chats públicos.",
+                "Desconfie de áudios e vídeos manipulados em cobranças.",
+            ),
+        ),
     ),
     (
         ("internet das coisas", "iot", "dispositivo conectado", "smart home"),
-        "Dispositivos IoT (TV, câmeras, assistentes) devem ter senha padrão alterada, firmware atualizado e rede Wi-Fi segura.",
+        "Como proteger dispositivos IoT?",
+        _fmt_chat(
+            "Internet das Coisas (IoT)",
+            "TVs, câmeras e assistentes conectados ampliam a superfície de ataque da sua rede.",
+            lista=(
+                "Troque senhas padrão de fábrica.",
+                "Mantenha firmware atualizado.",
+                "Separe rede de convidados no roteador, se possível.",
+            ),
+        ),
     ),
     (
         ("privacidade", "dados pessoais", "lgpd", "vazamento"),
-        "Minimize dados compartilhados online, revise permissões de apps e altere senhas após vazamentos conhecidos. "
-        "No Brasil, a LGPD orienta o tratamento de dados pessoais.",
+        "Privacidade e vazamento de dados",
+        _fmt_chat(
+            "Privacidade e LGPD",
+            "No Brasil, a LGPD orienta como empresas tratam dados pessoais.",
+            lista=(
+                "Minimize o que você publica nas redes.",
+                "Revise permissões de aplicativos.",
+                "Altere senhas após vazamentos conhecidos.",
+            ),
+        ),
     ),
     (
         ("estudar tecnologia", "curso tads", "aprender programacao", "carreira ti"),
-        "Tecnologia e cibersegurança são áreas em crescimento. Cursos como TADS combinam desenvolvimento e boas práticas. "
-        "Pratique em ambientes legais e éticos (laboratórios, CTFs autorizados).",
+        "Carreira em tecnologia e ética",
+        _fmt_chat(
+            "Tecnologia e carreira",
+            "Áreas como desenvolvimento e cibersegurança estão em alta — o curso TADS da AEMS forma profissionais nesse contexto.",
+            lista=(
+                "Pratique em laboratórios e projetos legítimos.",
+                "Participe de CTFs e eventos autorizados.",
+                "Nunca use conhecimento para prejudicar terceiros.",
+            ),
+        ),
+    ),
+    (
+        ("proteger celular", "seguranca celular", "smartphone seguro"),
+        "Como proteger meu celular?",
+        _fmt_chat(
+            "Proteção do celular",
+            "Smartphones concentram banco, mensagens e fotos — são alvo frequente de golpes.",
+            lista=(
+                "Ative bloqueio por biometria ou PIN.",
+                "Mantenha sistema e apps atualizados.",
+                "Baixe apps só na loja oficial.",
+                "Ative rastreamento remoto (Buscar iPhone / Encontre meu dispositivo).",
+            ),
+        ),
+    ),
+    (
+        ("proteger pc", "seguranca computador", "proteger notebook"),
+        "Como proteger meu PC?",
+        _fmt_chat(
+            "Proteção do computador",
+            "PCs e notebooks armazenam documentos e acessos sensíveis.",
+            lista=(
+                "Use antivírus e firewall ativos.",
+                "Faça backup de arquivos importantes.",
+                "Evite software pirata e downloads duvidosos.",
+                "Desligue o PC quando não estiver em uso prolongado.",
+            ),
+        ),
+    ),
+    (
+        ("proteger roteador", "wifi seguro", "senha wifi"),
+        "Como proteger o roteador Wi-Fi?",
+        _fmt_chat(
+            "Roteador e Wi-Fi",
+            "O roteador é a porta de entrada da sua rede doméstica.",
+            lista=(
+                "Altere a senha padrão do painel administrativo.",
+                "Use WPA3 ou WPA2 com senha forte.",
+                "Atualize o firmware do fabricante.",
+                "Desative acesso remoto se não precisar.",
+            ),
+        ),
+    ),
+    (
+        ("ameacas pc", "ameacas computador", "risco pc", "proteger pc"),
+        "Quais ameaças são comuns no PC?",
+        "__DEVICE_PC__",
+    ),
+    (
+        ("ameacas celular", "risco celular", "ameacas smartphone"),
+        "Quais ameaças são comuns no celular?",
+        "__DEVICE_CELULAR__",
     ),
 )
 
-CHAT_SUGESTOES: Tuple[str, ...] = (
-    "O que é phishing?",
-    "Como proteger meu celular?",
-    "Quais ameaças são comuns no PC?",
-    "Como denunciar um golpe?",
-    "O que é ransomware?",
-    "Devo usar autenticação em dois fatores?",
+CHAT_RESPOSTAS_FIXAS: Dict[str, str] = {
+    "vazia": _fmt_chat(
+        "Digite sua pergunta",
+        "Estou pronto para ajudar com tecnologia e segurança digital.",
+        lista=("Use as sugestões abaixo ou escreva em suas palavras.",),
+    ),
+    "saudacao": _fmt_chat(
+        "Olá!",
+        "Sou o assistente AEMS de tecnologia e cibersegurança.",
+        lista=(
+            "Pergunte sobre golpes, ameaças e proteção de dispositivos.",
+            "Clique em uma sugestão para começar.",
+        ),
+        alerta="Não oriento invasões nem atividades ilegais.",
+    ),
+    "agradecimento": _fmt_chat(
+        "De nada!",
+        "Fico feliz em ajudar. Se surgir outra dúvida sobre segurança digital, é só perguntar.",
+    ),
+    "ajuda": "",
+    "fallback": _fmt_chat(
+        "Não encontrei esse tema",
+        "Tente reformular ou escolha um dos assuntos abaixo.",
+        lista=(
+            "Golpes: phishing, WhatsApp clonado, ligação falsa.",
+            "Ameaças: malware, ransomware, spyware.",
+            "Proteção: senhas, 2FA, backup, VPN, firewall.",
+            "Dispositivos: PC, celular, roteador.",
+        ),
+        alerta="Não oriento invasões ou atividades ilegais.",
+    ),
+    "boasVindas": _fmt_chat(
+        "Bem-vindo ao Assistente AEMS",
+        "Tire dúvidas sobre golpes na internet, ameaças digitais e boas práticas de tecnologia.",
+        lista=(
+            "Toque em uma pergunta sugerida ou escreva a sua.",
+            "As respostas usam a base de conhecimento do projeto (Python / Prolog).",
+        ),
+        alerta="Conteúdo educativo e ético — sem orientação para crimes digitais.",
+    ),
+}
+
+
+def _faq_ameacas_dispositivo(dev_id: str) -> str:
+    label = DISPOSITIVO_LABELS[dev_id]
+    ameacas = sorted({AMEACA_LABELS[a] for d, a in COMUM if d == dev_id})
+    sintomas = sorted({s.replace("_", " ") for d, s in SINTOMAS if d == dev_id})
+    extra = ""
+    if sintomas:
+        extra = "\n\n**Sintomas monitorados no modelo:** " + ", ".join(sintomas) + "."
+    return (
+        _fmt_chat(
+            f"Ameaças comuns — {label}",
+            "Segundo o modelo da base, este tipo de dispositivo costuma enfrentar riscos específicos.",
+            lista=tuple(ameacas) if ameacas else ("Consulte boas práticas gerais de segurança.",),
+            titulo_lista="Ameaças frequentes no modelo",
+        )
+        + extra
+    )
+
+
+def _resolver_faq_resposta(resposta: str) -> str:
+    if resposta == "__DEVICE_PC__":
+        return _faq_ameacas_dispositivo("pc")
+    if resposta == "__DEVICE_CELULAR__":
+        return _faq_ameacas_dispositivo("celular")
+    return resposta
+
+
+_CHAT_FAQS_RESOLVIDAS: Tuple[Tuple[Tuple[str, ...], str, str], ...] = tuple(
+    (pal, perg, _resolver_faq_resposta(resp)) for pal, perg, resp in CHAT_FAQS
 )
+CHAT_FAQS = _CHAT_FAQS_RESOLVIDAS
+
+CHAT_SUGESTOES: Tuple[str, ...] = tuple(dict.fromkeys(p for _, p, _ in CHAT_FAQS))
 
 
 def _pares_primeiro(pares: Set[Tuple[str, str]], primeiro: str) -> Set[str]:
@@ -494,7 +878,7 @@ def _verificar_bloqueio_etico(texto_norm: str) -> str | None:
 
 def _pontuar_faqs(texto_norm: str) -> List[Tuple[int, str]]:
     scores: List[Tuple[int, str]] = []
-    for palavras, resposta in CHAT_FAQS:
+    for palavras, _pergunta, resposta in CHAT_FAQS:
         pts = sum(1 for p in palavras if p in texto_norm)
         if pts > 0:
             scores.append((pts, resposta))
@@ -505,25 +889,49 @@ def _pontuar_faqs(texto_norm: str) -> List[Tuple[int, str]]:
 def _resposta_dispositivo_kb(kb: "BaseCiberseguranca", dev_id: str) -> str:
     label = DISPOSITIVO_LABELS.get(dev_id, dev_id)
     ameacas = [AMEACA_LABELS.get(a, a) for a in kb.ameacas_do_dispositivo(dev_id)]
-    sintomas = kb.sintomas_de(dev_id)
+    sintomas = [s.replace("_", " ") for s in kb.sintomas_de(dev_id)]
     nivel = kb.nivel_protecao(dev_id)
     medidas = [MEDIDA_LABELS.get(m, m) for d, m in kb.instalado if d == dev_id]
-    partes = [f"Na base de conhecimento, **{label}** tem nível de proteção exemplo: **{nivel}**."]
-    if ameacas:
-        partes.append("Ameaças comuns a este tipo: " + ", ".join(ameacas) + ".")
-    if sintomas:
-        partes.append("Sintomas registrados no modelo: " + ", ".join(sintomas) + ".")
+    nivel_txt = {"alto": "Alto", "medio": "Médio", "baixo": "Baixo"}.get(nivel, nivel)
+
+    lista_protecao: List[str] = []
     if medidas:
-        partes.append("Medidas de exemplo já associadas: " + ", ".join(medidas) + ".")
+        lista_protecao.append("Medidas no exemplo da base: " + ", ".join(medidas) + ".")
     else:
-        partes.append("No exemplo da base, não há medidas listadas — priorize antivírus, firewall e backups.")
+        lista_protecao.append("Priorize antivírus, firewall e backups.")
     if kb.recomenda_2fa(dev_id):
-        partes.append("Recomendação: ative autenticação em dois fatores.")
+        lista_protecao.append("Ative autenticação em dois fatores.")
     if kb.recomenda_backup(dev_id):
-        partes.append("Recomendação: mantenha backups atualizados.")
+        lista_protecao.append("Mantenha backups atualizados.")
+
+    alerta = ""
     if kb.exposto(dev_id):
-        partes.append("Alerta: perfil vulnerável sem medidas no modelo — reforce proteção básica.")
-    return " ".join(partes)
+        alerta = "Perfil vulnerável sem medidas no modelo — reforce proteção básica."
+
+    corpo = (
+        f"Nível de proteção (exemplo na base): **{nivel_txt}**."
+        + (f"\n\n**Ameaças comuns:** {', '.join(ameacas)}." if ameacas else "")
+        + (f"\n\n**Sintomas no modelo:** {', '.join(sintomas)}." if sintomas else "")
+    )
+    return _fmt_chat(
+        f"Proteção — {label}",
+        corpo,
+        lista=tuple(lista_protecao),
+        titulo_lista="Recomendações",
+        alerta=alerta,
+    )
+
+
+def _resposta_sintoma(sintoma: str) -> str:
+    ams = sorted({a for s, a in INDICA_AMEACA if s == sintoma})
+    nomes = tuple(AMEACA_LABELS.get(a, a) for a in ams)
+    return _fmt_chat(
+        f"Sintoma: {sintoma.replace('_', ' ')}",
+        "No modelo da base, este sinal pode estar associado às ameaças abaixo.",
+        lista=nomes if nomes else ("Consulte um técnico de confiança.",),
+        titulo_lista="Possíveis ameaças (modelo)",
+        alerta="Não substitui diagnóstico técnico — procure suporte especializado se necessário.",
+    )
 
 
 def responder_chat(mensagem: str, kb: "BaseCiberseguranca | None" = None) -> str:
@@ -531,7 +939,7 @@ def responder_chat(mensagem: str, kb: "BaseCiberseguranca | None" = None) -> str
     kb = kb or BaseCiberseguranca()
     texto = mensagem.strip()
     if not texto:
-        return "Digite sua dúvida sobre tecnologia, dispositivos ou segurança digital. Estou aqui para orientar de forma ética."
+        return CHAT_RESPOSTAS_FIXAS["vazia"]
 
     norm = _normalizar_texto(texto)
     bloqueio = _verificar_bloqueio_etico(norm)
@@ -539,24 +947,24 @@ def responder_chat(mensagem: str, kb: "BaseCiberseguranca | None" = None) -> str
         return bloqueio
 
     if any(s in norm for s in ("ola", "oi", "bom dia", "boa tarde", "boa noite", "e ai")):
-        return (
-            "Olá! Sou o assistente AEMS sobre tecnologia e cibersegurança. "
-            "Pergunte sobre golpes, ameaças, proteção de dispositivos ou boas práticas. "
-            "Não ajudo com atividades ilegais."
-        )
+        return CHAT_RESPOSTAS_FIXAS["saudacao"]
 
     if any(s in norm for s in ("obrigado", "valeu", "agradeço")):
-        return "Por nada! Se tiver outra dúvida sobre segurança digital, é só perguntar."
+        return CHAT_RESPOSTAS_FIXAS["agradecimento"]
+
+    for _palavras, _pergunta, resposta in CHAT_FAQS:
+        if _normalizar_texto(_pergunta) == norm or norm == _normalizar_texto(_pergunta.rstrip("?")):
+            return resposta
 
     ameaca = _detectar_ameaca(norm)
-    if ameaca and any(
-        s in norm for s in ("o que e", "oque e", "definicao", "defina", "explique", "significa")
-    ):
-        info = AMEACA_INFO.get(ameaca, "")
-        return f"**{AMEACA_LABELS[ameaca]}**: {info}"
-
     if ameaca and ameaca in AMEACA_INFO:
-        return f"**{AMEACA_LABELS[ameaca]}**: {AMEACA_INFO[ameaca]}"
+        return AMEACA_INFO[ameaca]
+
+    for codigo, texto_fmt in MEDIDA_INFO.items():
+        label = MEDIDA_LABELS[codigo]
+        if codigo in norm or _normalizar_texto(label) in norm:
+            if any(s in norm for s in ("o que e", "oque e", "definicao", "explique", "como", "para que")):
+                return texto_fmt
 
     dev = _detectar_dispositivo(norm)
     if dev and any(
@@ -576,40 +984,44 @@ def responder_chat(mensagem: str, kb: "BaseCiberseguranca | None" = None) -> str
 
     for sintoma, _ in INDICA_AMEACA:
         if sintoma.replace("_", " ") in norm or sintoma in norm:
-            ams = sorted({a for s, a in INDICA_AMEACA if s == sintoma})
-            if ams:
-                nomes = ", ".join(AMEACA_LABELS.get(a, a) for a in ams)
-                return (
-                    f"O sintoma «{sintoma.replace('_', ' ')}» no modelo pode indicar: {nomes}. "
-                    "Isso não substitui diagnóstico técnico — em dúvida, procure suporte especializado."
-                )
+            return _resposta_sintoma(sintoma)
 
     faqs = _pontuar_faqs(norm)
     if faqs and faqs[0][0] >= 1:
         return faqs[0][1]
 
     if any(s in norm for s in ("ajuda", "help", "duvida", "nao sei")):
-        sugest = "\n".join(f"• {s}" for s in CHAT_SUGESTOES[:5])
-        return f"Posso ajudar com golpes, ameaças, senhas e proteção de dispositivos. Exemplos:\n{sugest}"
+        sugest_itens = "\n".join(f"- {s}" for s in CHAT_SUGESTOES)
+        return (
+            _fmt_chat("Como posso ajudar", "Escolha um tema abaixo ou digite sua dúvida.")
+            + "\n\n**Perguntas sugeridas:**\n"
+            + sugest_itens
+        )
 
-    return (
-        "Não encontrei um tema exato na base, mas posso ajudar com cibersegurança e tecnologia em geral. "
-        "Tente perguntar sobre phishing, malware, senhas, backup, VPN ou proteção de um dispositivo (PC, celular, roteador). "
-        "Lembro que não oriento invasões ou atividades ilegais."
-    )
+    return CHAT_RESPOSTAS_FIXAS["fallback"]
 
 
 def build_chatbot_dict() -> Dict[str, Any]:
     """Dados do assistente para o front-end (JSON)."""
+    sugest_itens = "\n".join(f"- {s}" for s in CHAT_SUGESTOES)
+    ajuda = (
+        _fmt_chat("Como posso ajudar", "Escolha um tema abaixo ou digite sua dúvida.")
+        + "\n\n**Perguntas sugeridas:**\n"
+        + sugest_itens
+    )
+
+    respostas_fixas = dict(CHAT_RESPOSTAS_FIXAS)
+    respostas_fixas["ajuda"] = ajuda
+
     return {
-        "mensagemBoasVindas": (
-            "Olá! Sou o assistente AEMS de tecnologia e cibersegurança. "
-            "Tire dúvidas sobre golpes, ameaças, dispositivos e boas práticas — sempre de forma ética e educativa."
-        ),
+        "mensagemBoasVindas": respostas_fixas["boasVindas"],
+        "respostasFixas": respostas_fixas,
         "bloqueioEtico": [
             {"padroes": list(p), "resposta": r} for p, r in CHAT_BLOQUEIO_ETICO
         ],
-        "faqs": [{"palavras": list(p), "resposta": r} for p, r in CHAT_FAQS],
+        "faqs": [
+            {"palavras": list(p), "pergunta": q, "resposta": r} for p, q, r in CHAT_FAQS
+        ],
         "ameacaInfo": AMEACA_INFO,
         "medidaInfo": MEDIDA_INFO,
         "dispositivoAliases": {k: list(v) for k, v in DISPOSITIVO_ALIASES.items()},
